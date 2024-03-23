@@ -1,4 +1,4 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 const {
   getAllStudents,
@@ -8,11 +8,12 @@ const {
   updateStudent,
   deleteStudent,
 } = require("../controllers/studentControllers");
+const { isAuthenticated } = require("../middlewares/authentification");
 
 router.get("/", getAllStudents);
 router.get("/filter", getStudentByName);
 router.get("/:id", getStudentById);
-router.post("", createStudent);
+router.post("/", isAuthenticated, createStudent);
 router.put("/:id", updateStudent);
 router.delete("/:id", deleteStudent);
 
